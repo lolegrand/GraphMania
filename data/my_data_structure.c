@@ -1,5 +1,5 @@
 #include "my_data_structure.h"
-#include <malloc.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 MyDataStructure * createMyDataStructure(int val) {

@@ -1,4 +1,6 @@
-#include <malloc.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
 #include "graph.h"
 
 // ======== Static methode =======
@@ -52,6 +54,19 @@ static void removeLinkFromNodeByDestination(Graph * graph, struct Node * node, v
         beforeLinkHead = link;
         link = link->next;
     }
+    perror("Removing a link that does not exist");
+}
+
+// The starting node need to exist in the graph
+static bool existLink(Graph * graph, struct Node * startNode, void * arrive) {
+    struct Link * link = startNode->successors;
+    while (link != NULL) {
+        if (graph->dataComp(link->destination->data, arrive) == 0) {
+            return true;
+        }
+        link = link->next;
+    }
+    return false;
 }
 
 // ======== Implementation methode =======
@@ -85,6 +100,11 @@ void deleteGraph(Graph * graph) {
 }
 
 void addNodeToGraph(Graph * graph, void * data) {
+    struct Node * node = findNode(graph, data);
+    if (node != NULL) {
+        perror("Error inserting a node that already exist");
+        return;
+    }
     struct Node * new = createNode(data);
     new->next = graph->head;
     graph->head = new;
@@ -132,6 +152,12 @@ void addLinkToGraph(Graph * graph, void * start, void * arrive) {
     if (startNode == NULL) {
         perror("Trying to add a link to a node that does not exist");
         exit(EXIT_FAILURE);
+    }
+
+    bool alreadyExist = existLink(graph, startNode, arrive);
+    if (alreadyExist == true) {
+    perror("A link already exist");
+        return;
     }
 
     struct Link * link = createLink(arriveNode);

@@ -1,7 +1,7 @@
 #ifndef GRANDELIA_MY_DATA_STRUCTURE_H
 #define GRANDELIA_MY_DATA_STRUCTURE_H
 
-#include <mbstring.h>
+#include <stdio.h>
 
 typedef int MyDataStructure;
 

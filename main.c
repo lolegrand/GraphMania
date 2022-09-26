@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "graph/graph.h"
 #include "data/my_data_structure.h"
 #include "graph/graph_ui.h"
@@ -10,46 +12,10 @@ void populateGraph(Graph * graph) {
         myDataStructure[i] = createMyDataStructure(i);
         addNodeToGraph(graph, myDataStructure[i]);
     }
-
-    addLinkToGraph(graph, myDataStructure[0], myDataStructure[0]);
-    addLinkToGraph(graph, myDataStructure[0], myDataStructure[5]);
-    addLinkToGraph(graph, myDataStructure[0], myDataStructure[9]);
-
-    addLinkToGraph(graph, myDataStructure[1], myDataStructure[2]);
-    addLinkToGraph(graph, myDataStructure[1], myDataStructure[3]);
-    addLinkToGraph(graph, myDataStructure[1], myDataStructure[8]);
-
-    addLinkToGraph(graph, myDataStructure[2], myDataStructure[3]);
-    addLinkToGraph(graph, myDataStructure[2], myDataStructure[1]);
-    addLinkToGraph(graph, myDataStructure[2], myDataStructure[7]);
-
-    addLinkToGraph(graph, myDataStructure[3], myDataStructure[7]);
-    addLinkToGraph(graph, myDataStructure[3], myDataStructure[9]);
-    addLinkToGraph(graph, myDataStructure[3], myDataStructure[3]);
-
-    addLinkToGraph(graph, myDataStructure[4], myDataStructure[7]);
-    addLinkToGraph(graph, myDataStructure[4], myDataStructure[9]);
-    addLinkToGraph(graph, myDataStructure[4], myDataStructure[3]);
-
-    addLinkToGraph(graph, myDataStructure[5], myDataStructure[0]);
-    addLinkToGraph(graph, myDataStructure[5], myDataStructure[5]);
-    addLinkToGraph(graph, myDataStructure[5], myDataStructure[9]);
-
-    addLinkToGraph(graph, myDataStructure[6], myDataStructure[2]);
-    addLinkToGraph(graph, myDataStructure[6], myDataStructure[3]);
-    addLinkToGraph(graph, myDataStructure[6], myDataStructure[8]);
-
-    addLinkToGraph(graph, myDataStructure[7], myDataStructure[3]);
-    addLinkToGraph(graph, myDataStructure[7], myDataStructure[1]);
-    addLinkToGraph(graph, myDataStructure[7], myDataStructure[7]);
-
-    addLinkToGraph(graph, myDataStructure[8], myDataStructure[7]);
-    addLinkToGraph(graph, myDataStructure[8], myDataStructure[9]);
-    addLinkToGraph(graph, myDataStructure[8], myDataStructure[3]);
-
-    addLinkToGraph(graph, myDataStructure[9], myDataStructure[7]);
-    addLinkToGraph(graph, myDataStructure[9], myDataStructure[9]);
-    addLinkToGraph(graph, myDataStructure[9], myDataStructure[3]);
+    srand(time(NULL));
+    for (int i = 0; i < 30; ++i) {
+        addLinkToGraph(graph, myDataStructure[rand() % 10], myDataStructure[rand() % 10]);
+    }
 }
 
 int main() {
